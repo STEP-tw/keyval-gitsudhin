@@ -3,6 +3,7 @@ const errors=function(filePath){return "../src/errors/"+filePath};
 
 const assert=require('chai').assert;
 const assertN= require('assert');
+const Parsed=require(src('parsed.js'));
 const Parser=require(src('index.js')).Parser;
 const MissingValueError=require(errors('missingValueError.js'));
 const MissingEndQuoteError=require(errors('missingEndQuoteError.js'));
@@ -30,28 +31,37 @@ describe("parse basic key values",function(){
 
   it("parse when there are leading spaces before key",function(){
     let actual=kvParser.parse(" key=value");
-    let expected = {'key':'value'};
-    assert.ownInclude(expected,actual);
+    let expected=new Parsed();
+    expected['key']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse when there are spaces after key",function(){
-    let expected={key:"value"};
-    assert.ownInclude(expected,kvParser.parse("key =value"));
+    let actual=kvParser.parse("key =value");
+    let expected=new Parsed();
+    expected['key']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse when there are spaces before and after key",function(){
-    let expected={key:"value"};
-    assert.ownInclude(expected,kvParser.parse(" key =value"));
+    let actual=kvParser.parse(" key =value");
+    let expected=new Parsed();
+    expected['key']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse when there are spaces before value",function(){
-    let expected={key:"value"};
-    assert.ownInclude(expected,kvParser.parse("key= value"));
+    let actual=kvParser.parse("key= value");
+    let expected=new Parsed();
+    expected['key']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse when there are spaces after value",function(){
-    let expected={key:"value"};
-    assert.ownInclude(expected,kvParser.parse("key=value "));
+    let actual=kvParser.parse("key=value ");
+    let expected=new Parsed();
+    expected['key']='value';
+    assert.deepEqual(expected,actual);
   });
 });
 
