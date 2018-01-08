@@ -71,43 +71,59 @@ describe("parse digits and other special chars",function(){
   });
 
   it("parse keys with a single digit",function(){
-    let expected={'1':"value"};
-    assert.ownInclude(expected,kvParser.parse("1=value"));
+    let actual=kvParser.parse(" 1=value");
+    let expected=new Parsed();
+    expected['1']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse keys with only multiple digits",function(){
-    let expected={'123':"value"};
-    assert.ownInclude(expected,kvParser.parse("123=value"));
+    let actual=kvParser.parse(" 123=value");
+    let expected=new Parsed();
+    expected['123']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse keys with leading 0s",function(){
-    let expected={'0123':"value"};
-    assert.ownInclude(expected,kvParser.parse("0123=value"));
+    let actual=kvParser.parse("0123=value");
+    let expected=new Parsed();
+    expected['0123']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse keys with underscores",function(){
-    let expected={'first_name':"value"};
-    assert.ownInclude(expected,kvParser.parse("first_name=value"));
+    let actual=kvParser.parse("first_name=value");
+    let expected=new Parsed();
+    expected['first_name']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse keys with a single underscore",function(){
-    let expected={'_':"value"};
-    assert.ownInclude(expected,kvParser.parse("_=value"));
+    let actual=kvParser.parse("_=value");
+    let expected=new Parsed();
+    expected['_']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse keys with multiple underscores",function(){
-    let expected={'__':"value"};
-    assert.ownInclude(expected,kvParser.parse("__=value"));
+    let actual=kvParser.parse("__=value");
+    let expected=new Parsed();
+    expected['__']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse keys with alphabets and digits(digits leading)",function(){
-    let expected={'0abc':"value"};
-    assert.ownInclude(expected,kvParser.parse("0abc=value"));
+    let actual=kvParser.parse("0abc=value");
+    let expected=new Parsed();
+    expected['0abc']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse keys with alphabets and digits(alphabets leading)",function(){
-    let expected={'a0bc':"value"};
-    assert.ownInclude(expected,kvParser.parse("a0bc=value"));
+    let actual=kvParser.parse("a0bc=value");
+    let expected=new Parsed();
+    expected['a0bc']='value';
+    assert.deepEqual(expected,actual);
   });
 });
 
