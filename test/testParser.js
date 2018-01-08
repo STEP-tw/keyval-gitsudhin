@@ -159,23 +159,31 @@ describe("single values with quotes",function(){
   });
 
   it("parse a single value with quotes",function(){
-    let expected={key:"value"};
-    assert.ownInclude(expected,kvParser.parse("key=\"value\""));
+    let actual=kvParser.parse("key=\"value\"");
+    let expected=new Parsed();
+    expected['key']='value';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse a single quoted value that has spaces in it",function(){
-    let expected={key:"va lue"};
-    assert.ownInclude(expected,kvParser.parse("key=\"va lue\""));
+    let actual=kvParser.parse("key=\"va lue\"");
+    let expected=new Parsed();
+    expected['key']='va lue';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse a single quoted value that has spaces in it and leading spaces",function(){
-    let expected={key:"va lue"};
-    assert.ownInclude(expected,kvParser.parse("key=   \"va lue\""));
+    let actual=kvParser.parse("key=   \"va lue\"");
+    let expected=new Parsed();
+    expected['key']='va lue';
+    assert.deepEqual(expected,actual);
   });
 
   it("parse a single quoted value that has spaces in it and trailing spaces",function(){
-    let expected={key:"va lue"};
-    assert.ownInclude(expected,kvParser.parse("key=\"va lue\"   "));
+    let actual=kvParser.parse("key=\"va lue\"   ");
+    let expected=new Parsed();
+    expected['key']='va lue';
+    assert.deepEqual(expected,actual);
   });
 });
 
