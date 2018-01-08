@@ -31,27 +31,27 @@ describe("parse basic key values",function(){
   it("parse when there are leading spaces before key",function(){
     let actual=kvParser.parse(" key=value");
     let expected = {'key':'value'};
-    assert.deepEqual(expected,kvParser.parse(" key=value"));
+    assertC.ownInclude(expected,actual);
   });
 
   it("parse when there are spaces after key",function(){
     let expected={key:"value"};
-    assert.deepEqual(expected,kvParser.parse("key =value"));
+    assertC.ownInclude(expected,kvParser.parse("key =value"));
   });
 
   it("parse when there are spaces before and after key",function(){
     let expected={key:"value"};
-    assert.deepEqual(expected,kvParser.parse(" key =value"));
+    assertC.ownInclude(expected,kvParser.parse(" key =value"));
   });
 
   it("parse when there are spaces before value",function(){
     let expected={key:"value"};
-    assert.deepEqual(expected,kvParser.parse("key= value"));
+    assertC.ownInclude(expected,kvParser.parse("key= value"));
   });
 
   it("parse when there are spaces after value",function(){
     let expected={key:"value"};
-    assert.deepEqual(expected,kvParser.parse("key=value "));
+    assertC.ownInclude(expected,kvParser.parse("key=value "));
   });
 });
 
