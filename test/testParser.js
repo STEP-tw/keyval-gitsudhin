@@ -211,11 +211,9 @@ describe("error handling",function(){
   });
 
   it("throws error on missing value when value is unquoted",function(){
-    assertN.throws(
-      () => {
-        kvParser.parse("key=")
-      },
-      errorChecker("key",3,MissingValueError));
+    let actualErrorFunction=() => {kvParser.parse("key=") };
+    let expectedFunction=errorChecker("key",3,MissingValueError);
+    assertN.throws(actualErrorFunction,expectedFunction);
   });
 
   it("throws error on missing value when value is quoted",function(){
